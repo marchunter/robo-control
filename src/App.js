@@ -1,24 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import ControlComponent from './components/ControlComponent';
+import RobotFeedComponent from './components/RobotFeedComponent';
+import { useState} from 'react';
+import {RobotContextProvider} from './components/RobotContext.js';
 
 function App() {
+  const [currentStatus, setValue] = useState("");
+  const controlDirection = (e) => {
+    setValue(e);
+  };
+ const value = {currentStatus, setValue};
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RobotContextProvider value={value}>
+          <ControlComponent/>
+          <RobotFeedComponent/>
+      </RobotContextProvider>              
     </div>
+
   );
 }
 
